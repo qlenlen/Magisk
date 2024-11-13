@@ -6,7 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-setupAppCommon()
+setupMainApk()
 
 kapt {
     correctErrorTypes = true
@@ -18,27 +18,6 @@ kapt {
 }
 
 android {
-    namespace = "com.topjohnwu.magisk"
-
-    defaultConfig {
-        applicationId = "com.topjohnwu.magisk"
-        vectorDrawables.useSupportLibrary = true
-        versionName = Config.version
-        versionCode = Config.versionCode
-        ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64", "riscv64")
-            debugSymbolLevel = "FULL"
-        }
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles("proguard-rules.pro")
-        }
-    }
-
     buildFeatures {
         dataBinding = true
     }
