@@ -17,8 +17,7 @@ import org.gradle.api.Action
 import org.gradle.api.DefaultTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.Task
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Copy
@@ -31,7 +30,6 @@ import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.exclude
 import org.gradle.kotlin.dsl.filter
 import org.gradle.kotlin.dsl.get
@@ -77,7 +75,7 @@ fun Project.setupCommon() {
         compileSdkVersion(35)
         buildToolsVersion = "34.0.0"
         ndkPath = "$sdkDirectory/ndk/magisk"
-        ndkVersion = "27.0.12077973"
+        ndkVersion = "28.0.12674087"
 
         defaultConfig {
             minSdk = 23
@@ -314,10 +312,6 @@ fun Project.setupAppCommon() {
                     signingConfig = if (it.storeFile?.exists() == true) it
                     else signingConfigs["debug"]
                 }
-            }
-            release {
-                isMinifyEnabled = true
-                isShrinkResources = true
             }
         }
 

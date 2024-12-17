@@ -1,15 +1,6 @@
 name: Magisk Build
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "app/**"
-      - "native/**"
-      - "buildSrc/**"
-      - "build.py"
-      - "gradle.properties"
-      - ".github/workflows/build.yml"
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -83,11 +74,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+        version: [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
         type: [""]
         include:
-          - version: 35
+          - version: "Baklava"
             type: "google_apis"
+          - version: "Baklava"
+            type: "google_apis_ps16k"
 
     steps:
       - name: Check out
@@ -161,7 +154,7 @@ jobs:
             kernel.log
             logcat.log
 
-  cf_test:
+  cf-test:
     name: Test ${{ matrix.device }}
     runs-on: ubuntu-24.04
     needs: build
@@ -173,8 +166,6 @@ jobs:
         include:
           - branch: "aosp-main"
             device: "aosp_cf_x86_64_phone"
-          - branch: "aosp-main-throttled"
-            device: "aosp_cf_x86_64_phone_pgagnostic"
 
     steps:
       - name: Check out
